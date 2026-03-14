@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Validar Cédula</title>
+</head>
+
+<body>
+
+<h2>Validador de Cédula Dominicana</h2>
+
+<input type="text" id="cedula" placeholder="Ingrese la cédula">
+<button onclick="validar()">Validar</button>
+
+<p id="resultado"></p>
+
+<script src="registrodecedula.js"></script>
+
+<script>
+
+function validar(){
+
+let cedula = document.getElementById("cedula").value;
+cedula = cedula.replace(/-/g,"");
+
+if(cedula.length != 11){
+document.getElementById("resultado").innerHTML="CÉDULA ES INCORRECTA";
+return;
+}
+
+let suma=0;
+
+for(let i=0;i<10;i++){
+
+let num=parseInt(cedula[i]);
+let mult=(i%2==0)?1:2;
+let res=num*mult;
+
+if(res>9){
+res=Math.floor(res/10)+(res%10);
+}
+
+suma+=res;
+}
+
+let digito=(10-(suma%10))%10;
+
+
+if(digito==cedula[10]){
+document.getElementById("resultado").innerHTML="CÉDULA ES CORRECTA";
+}
+else{
+document.getElementById("resultado").innerHTML="CÉDULA ES INCORRECTA";
+}
+
+}
+
+</script>
+
+</body>
+</html>
